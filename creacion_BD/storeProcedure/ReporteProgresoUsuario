@@ -1,0 +1,16 @@
+CREATE PROCEDURE sp_ReporteProgresoUsuario
+    @IDUsuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        C.nombre AS Curso,
+        V.ArchivosCompletados,
+        V.ArchivosTotales,
+        V.PorcentajeProgreso
+    FROM vista_ProgresoPorUsuarioCurso AS V
+    INNER JOIN Curso AS C ON C.IDCurso = V.IDCurso
+    WHERE V.IDUsuario = @IDUsuario;
+END;
+GO
